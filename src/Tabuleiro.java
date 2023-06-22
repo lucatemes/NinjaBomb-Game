@@ -48,8 +48,7 @@ public class Tabuleiro extends JPanel {
             return true;
         }
     }
-
-    // Retorna referencia em determinada posição
+    
     public  ElementoBasico getElementoNaPosicao(int lin, int col) {
         if (!posicaoValida(lin, col)) {
             return null;
@@ -72,8 +71,8 @@ public class Tabuleiro extends JPanel {
         int lin = elemento.getLin();
         int col = elemento.getCol();
             ElementoBasico elementoAnterior = celulas[lin][col];
-            Grama grama = new Grama("Grama", "grass.jfif", lin, col, tabuleiro);
-            celulas[lin][col] = grama;
+            Chao chao = new Chao("Chao", "grass.jfif", lin, col, tabuleiro);
+            celulas[lin][col] = chao;
         return elementoAnterior;
 
     }

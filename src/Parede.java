@@ -1,6 +1,6 @@
-public class Muro extends ElementoBasico {
+public class Parede extends ElementoBasico {
 
-    public Muro(String id, String iconPath, int linInicial, int colInicial, Tabuleiro tabuleiro) {
+    public Parede(String id, String iconPath, int linInicial, int colInicial, Tabuleiro tabuleiro) {
         super(id, iconPath, linInicial, colInicial, tabuleiro);
       
     }

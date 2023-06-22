@@ -1,8 +1,8 @@
-public class Grama extends ElementoBasico {
+public class Chao extends ElementoBasico {
 
     private String conteudo;
 
-    public Grama(String id, String conteudo, int linInicial, int colInicial, Tabuleiro tabuleiro) {
+    public Chao(String id, String conteudo, int linInicial, int colInicial, Tabuleiro tabuleiro) {
         super(id, "grass.jfif", linInicial, colInicial, tabuleiro);
         this.conteudo = conteudo;
        

@@ -37,14 +37,12 @@ public class App extends JFrame implements ActionListener {
         painelGeral.add(tabuleiro);
         painelGeral.add(botoesDirecao);
 
-        // Insere os personagens no tabuleiro
         personagem = new Personagem("Ninja", "ninja.jpg", 2, 2, tabuleiro);
         ElementoBasico anterior = tabuleiro.insereElemento(personagem);
         personagem.setAnterior(anterior);
-        Grama[][] grama = new Grama[43][43];
-        Muro[][] muro = new Muro[17][17];
+        Chao[][] chao = new Chao[43][43];
+        Parede[][] paredes = new Parede[17][17];
         Bomba[][] bombas= new Bomba[10][10];
-
 
         Saida saida = new Saida("saida", "obsidian.jpg",0 ,8,tabuleiro);
         Pergunta pergunta1 = new Pergunta("pergunta", 0, 4, 3, tabuleiro);
@@ -56,45 +54,38 @@ public class App extends JFrame implements ActionListener {
         Bomba bomba = new Bomba("Bomba", 0,8 , 8,  tabuleiro);
         
 
-        if (personagem.getPosX() == 5 && personagem.getPosY() == 6) {
-            Bomba armadilhaAUx = new Bomba("armadilha1", 2, 5, 6, tabuleiro);
-            
-            armadilhaAUx.acao(personagem);
-       
+
+        int[] posicaoXchao = { 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 2, 2, 3, 4, 3, 4, 5, 6, 7, 9, 9, 9, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 1, 1, 1, 2, 2, 3, 3, 3};
+        int[] posicaoYchao = { 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5, 5, 6, 7, 6, 6, 7, 7, 7, 7, 7, 8, 7, 6, 2, 3, 0, 1, 2, 3, 4, 1, 2, 3, 4, 0, 1, 3, 4, 1, 2, 3, 4, 1, 2, 3, 1, 3, 1, 2, 3};    
+        //coloca o chao
+        for (int i = 0; i < posicaoXchao.length; i++) {
+            int x = posicaoXchao[i];
+            int y = posicaoYchao[i];
+            chao[x][y] = new Chao("chao", "grass.jfif", x, y, tabuleiro);
+            tabuleiro.insereElemento(chao[x][y]);
 
         }
 
-        int[] posicoesXgrama = { 0, 0, 0, 0, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 1, 2, 2, 2, 3, 4, 3, 4, 5, 6, 7, 9, 9, 9, 5, 5, 6, 6, 6, 6, 6, 7, 7, 7, 7, 8, 8, 8, 8, 9, 9, 9, 9, 1, 1, 1, 2, 2, 3, 3, 3};
-        int[] posicoesYgrama = { 5, 6, 7, 8, 9, 9, 9, 9, 9, 9, 9, 9, 9, 9, 5, 5, 6, 7, 6, 6, 7, 7, 7, 7, 7, 8, 7, 6, 2, 3, 0, 1, 2, 3, 4, 1, 2, 3, 4, 0, 1, 3, 4, 1, 2, 3, 4, 1, 2, 3, 1, 3, 1, 2, 3};
-
-        for (int i = 0; i < posicoesXgrama.length; i++) {
-            int x = posicoesXgrama[i];
-            int y = posicoesYgrama[i];
-            grama[x][y] = new Grama("grama", "grass.jfif", x, y, tabuleiro);
-            tabuleiro.insereElemento(grama[x][y]);
-
-        }
-
-        int[] posicoesXmuro = { 3,3,3,3,3,3,3,3,3,6,6,6,6,6,6,6,6,6,7,8};
-        int[] posicoesYmuro = { 0,1,2,3,5,6,7,8,9,0,1,2,3,4,5,7,8,9,7 ,7 };
-
-        for (int i = 0; i < posicoesYmuro.length; i++) {
-            int x = posicoesYmuro[i];
-            int y = posicoesXmuro[i];
-            muro[x][y] = new Muro("muro", "wall.jpg", x, y, tabuleiro);
-            tabuleiro.insereElemento(muro[x][y]);
+        int[] posicaoXparede = { 3,3,3,3,3,3,3,3,3,6,6,6,6,6,6,6,6,6,7,8};
+        int[] posicaoYparede = { 0,1,2,3,5,6,7,8,9,0,1,2,3,4,5,7,8,9,7 ,7 };
+        //posiciona as paredes do mapa
+        for (int i = 0; i < posicaoYparede.length; i++) {
+            int x = posicaoYparede[i];
+            int y = posicaoXparede[i];
+            paredes[x][y] = new Parede("parede", "wall.jpg", x, y, tabuleiro);
+            tabuleiro.insereElemento(paredes[x][y]);
         }
 
         int[] posicoesXbomb = { 1,5,8,3,1};
         int[] posicoesYbomb = { 1,2,1,5,4};
-
+        //posiciona as bombas
         for (int i = 0; i < posicoesYbomb.length; i++) {
             int x = posicoesXbomb[i];
             int y = posicoesYbomb[i];
             bombas[x][y] = new Bomba("bomba", 0, x, y, tabuleiro);
             tabuleiro.insereElemento(bombas[x][y]);
         }
-        
+        //insere os elementos
         tabuleiro.insereElemento(saida);
         tabuleiro.insereElemento(pergunta1);
         tabuleiro.insereElemento(pergunta2);
@@ -104,10 +95,10 @@ public class App extends JFrame implements ActionListener {
         tabuleiro.insereElemento(pergaminho1);
         tabuleiro.insereElemento(pergaminho2);
         tabuleiro.insereElemento(pergaminho3);
-
+        
         this.add(painelGeral);
 
-        this.setSize(700, 700);
+        this.setSize(680, 700);
         this.setTitle("MineBomb");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
@@ -130,13 +121,10 @@ public class App extends JFrame implements ActionListener {
             personagem.moveBaixo();
         }
         tabuleiro.atualizaVisualizacao();
-        
-        
     }
 
     public void actionSelectClick(ActionEvent arg0) {
         JButton but = (JButton) arg0.getSource();
-
     }
 
     public static void main(String[] args) {
